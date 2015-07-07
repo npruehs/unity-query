@@ -16,13 +16,13 @@ namespace UnityQuery
         #region Public Methods and Operators
 
         /// <summary>
-        ///   Checks whether the first sequence contains all elements of the second one.
+        ///   Checks whether a sequence contains all elements of another one.
         /// </summary>
         /// <typeparam name="T">Type of the elements of the sequence to check.</typeparam>
         /// <param name="first">Containing sequence.</param>
         /// <param name="second">Contained sequence.</param>
         /// <returns>
-        ///   <c>true</c>, if the first sequence contains all elements of the second one, and
+        ///   <c>true</c>, if the sequence contains all elements of the other one, and
         ///   <c>false</c> otherwise.
         /// </returns>
         public static bool ContainsAll<T>(this IEnumerable<T> first, IEnumerable<T> second)
@@ -83,7 +83,34 @@ namespace UnityQuery
         }
 
         /// <summary>
-        ///   Determines whether the sequence is null or doesn't contain any elements.
+        ///   Returns the zero-based index of the first occurrence of the specified item in a sequence.
+        /// </summary>
+        /// <typeparam name="T">Type of the elements of the sequence.</typeparam>
+        /// <param name="items">Sequence to search.</param>
+        /// <param name="item">Item to search for.</param>
+        /// <returns>
+        ///   Index of the specified item, if it could be found,
+        ///   and <c>-1</c> otherwise.
+        /// </returns>
+        public static int IndexOf<T>(this IEnumerable<T> items, T item)
+        {
+            var index = 0;
+
+            foreach (var i in items)
+            {
+                if (Equals(i, item))
+                {
+                    return index;
+                }
+
+                ++index;
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        ///   Determines whether a sequence is null or doesn't contain any elements.
         /// </summary>
         /// <typeparam name="T">Type of the elements of the sequence to check.</typeparam>
         /// <param name="sequence">Sequence to check. </param>
@@ -102,10 +129,10 @@ namespace UnityQuery
         }
 
         /// <summary>
-        ///   Returns a comma-separated string that represents the specified sequence.
+        ///   Returns a comma-separated string that represents a sequence.
         /// </summary>
         /// <param name="sequence">Sequence to get a textual representation of.</param>
-        /// <returns>Comma-separated string that represents the specified sequence.</returns>
+        /// <returns>Comma-separated string that represents the sequence.</returns>
         public static string SequenceToString(this IEnumerable sequence)
         {
             // Check empty sequence.

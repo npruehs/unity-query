@@ -42,6 +42,18 @@ namespace UnityQuery.Tests
         }
 
         [Test]
+        public void TestIndexOf()
+        {
+            // Arrange.
+            IEnumerable<int> list = new List<int> { 1, 2, 3 };
+
+            // Assert.
+            Assert.AreEqual(0, list.IndexOf(1));
+            Assert.AreEqual(2, list.IndexOf(3));
+            Assert.AreEqual(-1, list.IndexOf(5));
+        }
+
+        [Test]
         public void TestNullOrEmpty()
         {
             // Arrange.
