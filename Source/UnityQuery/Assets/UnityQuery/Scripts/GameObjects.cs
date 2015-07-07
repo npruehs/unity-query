@@ -6,6 +6,9 @@
 
 namespace UnityQuery
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     using UnityEngine;
 
     public static class GameObjects
@@ -59,6 +62,91 @@ namespace UnityQuery
             transform.localScale = Vector3.one;
             go.layer = parent.layer;
             return go;
+        }
+
+        /// <summary>
+        ///   Selects all ancestors (parent, grandparent, etc.) of the
+        ///   specified game object.
+        /// </summary>
+        /// <param name="gameObject">Game object to select the ancestors of.</param>
+        /// <returns>All ancestors of the specified game object.</returns>
+        public static IEnumerable<GameObject> GetAncestors(this GameObject gameObject)
+        {
+            var parent = gameObject.transform.parent;
+
+            while (parent != null)
+            {
+                yield return parent.gameObject;
+                parent = parent.parent;
+            }
+        }
+
+        /// <summary>
+        ///   Selects all ancestors (parent, grandparent, etc.) of the
+        ///   specified game object, and the game object itself.
+        /// </summary>
+        /// <param name="gameObject">Game object to select the ancestors of.</param>
+        /// <returns>
+        ///   All ancestors of the specified game object,
+        ///   and the game object itself.
+        /// </returns>
+        public static IEnumerable<GameObject> GetAncestorsAndSelf(this GameObject gameObject)
+        {
+            yield return gameObject;
+
+            foreach (var ancestor in gameObject.GetAncestors())
+            {
+                yield return ancestor;
+            }
+        }
+
+        /// <summary>
+        ///   Selects all children of the specified game object.
+        /// </summary>
+        /// <param name="gameObject">Game object to select the children of.</param>
+        /// <returns>All children of the specified game object.</returns>
+        public static IEnumerable<GameObject> GetChildren(this GameObject gameObject)
+        {
+            return (from Transform child in gameObject.transform select child.gameObject);
+        }
+
+        /// <summary>
+        ///   Selects all descendants (children, grandchildren, etc.) of the
+        ///   specified game object.
+        /// </summary>
+        /// <param name="gameObject">Game object to select the descendants of.</param>
+        /// <returns>All descendants of the specified game object.</returns>
+        public static IEnumerable<GameObject> GetDescendants(this GameObject gameObject)
+        {
+            foreach (var child in gameObject.GetChildren())
+            {
+                yield return child;
+
+                // Depth-first.
+                foreach (var descendant in child.GetDescendants())
+                {
+                    yield return descendant;
+                }
+            }
+        }
+
+        /// <summary>
+        ///   Selects all descendants (children, grandchildren, etc.) of the
+        ///   specified game object, and the game object itself.
+        /// </summary>
+        /// <param name="gameObject">Game object to select the descendants of.</param>
+        /// <returns>
+        ///   All descendants of the specified game object,
+        ///   and the game object itself.
+        /// </returns>
+        public static IEnumerable<GameObject> GetDescendantsAndSelf(this GameObject gameObject)
+        {
+            yield return gameObject;
+
+            foreach (var descendant in gameObject.GetDescendants())
+            {
+                yield return descendant;
+            }
         }
 
         #endregion
