@@ -65,6 +65,28 @@ namespace UnityQuery
         }
 
         /// <summary>
+        ///   Destroys all children of the specified game object.
+        /// </summary>
+        /// <param name="gameObject">Game object to destroy all children of.</param>
+        public static void DestroyChildren(this GameObject gameObject)
+        {
+            foreach (var child in gameObject.GetChildren())
+            {
+                // Hide immediately.
+                child.SetActive(false);
+
+                if (Application.isEditor && !Application.isPlaying)
+                {
+                    Object.DestroyImmediate(child);
+                }
+                else
+                {
+                    Object.Destroy(child);
+                }
+            }
+        }
+
+        /// <summary>
         ///   Selects all ancestors (parent, grandparent, etc.) of the
         ///   specified game object.
         /// </summary>
