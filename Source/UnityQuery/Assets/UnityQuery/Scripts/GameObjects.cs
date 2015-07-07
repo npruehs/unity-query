@@ -57,9 +57,7 @@ namespace UnityQuery
 
             var transform = go.transform;
             transform.parent = parent.transform;
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.identity;
-            transform.localScale = Vector3.one;
+            transform.Reset();
             go.layer = parent.layer;
             return go;
         }
@@ -210,6 +208,17 @@ namespace UnityQuery
         public static bool IsDescendantOf(this GameObject gameObject, GameObject ancestor)
         {
             return gameObject.GetAncestors().Contains(ancestor);
+        }
+
+        /// <summary>
+        ///   Resets the local position, rotation and scale of a transform.
+        /// </summary>
+        /// <param name="transform">Transform to reset.</param>
+        public static void Reset(this Transform transform)
+        {
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+            transform.localScale = Vector3.one;
         }
 
         #endregion
