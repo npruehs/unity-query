@@ -13,6 +13,22 @@ If you're missing any of your personal favotites, we'd love to see it - please r
 * Hierarchy manipulation (e.g. DestroyChildren)
 * Collection extensions (e.g. ContainsAll, GetValueOrDefault, IsNullOrEmpty, SequenceToString)
 
+## Usage
+
+Just import the `UnityQuery` namespace and you're good to go!
+
+    using UnityQuery;
+
+Right now, all of the UnityQuery methods are implemented as extension methods.
+
+    Vector3 u = new Vector3(1, 2, 3);
+    Vector2 v = u.XY();
+	
+That means, you can use all of them as syntatic sugar without having to recall where they're located.
+
+    var list = new List<int> { 1, 2, 3 };
+    Debug.Log(list.SequenceToString());
+
 ## Development Cycle
 
 We know that using a library like UnityQuery in production requires you to be completely sure about stability and compatibility. Thus, new releases of UnityQuery are created using [Semantic Versioning](http://semver.org/). In short:
