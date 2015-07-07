@@ -16,7 +16,7 @@ namespace UnityQuery
         #region Public Methods and Operators
 
         /// <summary>
-        ///   Instantiates a new game object and parents it to the specified one.
+        ///   Instantiates a new game object and parents it to this one.
         ///   Resets position, rotation and scale and inherits the layer.
         /// </summary>
         /// <param name="parent">Game object to add the child to.</param>
@@ -27,7 +27,7 @@ namespace UnityQuery
         }
 
         /// <summary>
-        ///   Instantiates a new game object and parents it to the specified one.
+        ///   Instantiates a new game object and parents it to this one.
         ///   Resets position, rotation and scale and inherits the layer.
         /// </summary>
         /// <param name="parent">Game object to add the child to.</param>
@@ -41,7 +41,7 @@ namespace UnityQuery
         }
 
         /// <summary>
-        ///   Instantiates a prefab and parents it to the specified one.
+        ///   Instantiates a prefab and parents it to this one.
         ///   Resets position, rotation and scale and inherits the layer.
         /// </summary>
         /// <param name="parent">Game object to add the child to.</param>
@@ -65,7 +65,7 @@ namespace UnityQuery
         }
 
         /// <summary>
-        ///   Destroys all children of the specified game object.
+        ///   Destroys all children of a object.
         /// </summary>
         /// <param name="gameObject">Game object to destroy all children of.</param>
         public static void DestroyChildren(this GameObject gameObject)
@@ -87,11 +87,10 @@ namespace UnityQuery
         }
 
         /// <summary>
-        ///   Selects all ancestors (parent, grandparent, etc.) of the
-        ///   specified game object.
+        ///   Selects all ancestors (parent, grandparent, etc.) of a game object.
         /// </summary>
         /// <param name="gameObject">Game object to select the ancestors of.</param>
-        /// <returns>All ancestors of the specified game object.</returns>
+        /// <returns>All ancestors of the object.</returns>
         public static IEnumerable<GameObject> GetAncestors(this GameObject gameObject)
         {
             var parent = gameObject.transform.parent;
@@ -104,12 +103,12 @@ namespace UnityQuery
         }
 
         /// <summary>
-        ///   Selects all ancestors (parent, grandparent, etc.) of the
-        ///   specified game object, and the game object itself.
+        ///   Selects all ancestors (parent, grandparent, etc.) of a game object,
+        ///   and the game object itself.
         /// </summary>
         /// <param name="gameObject">Game object to select the ancestors of.</param>
         /// <returns>
-        ///   All ancestors of the specified game object,
+        ///   All ancestors of the game object,
         ///   and the game object itself.
         /// </returns>
         public static IEnumerable<GameObject> GetAncestorsAndSelf(this GameObject gameObject)
@@ -123,21 +122,20 @@ namespace UnityQuery
         }
 
         /// <summary>
-        ///   Selects all children of the specified game object.
+        ///   Selects all children of a game object.
         /// </summary>
         /// <param name="gameObject">Game object to select the children of.</param>
-        /// <returns>All children of the specified game object.</returns>
+        /// <returns>All children of the game object.</returns>
         public static IEnumerable<GameObject> GetChildren(this GameObject gameObject)
         {
             return (from Transform child in gameObject.transform select child.gameObject);
         }
 
         /// <summary>
-        ///   Selects all descendants (children, grandchildren, etc.) of the
-        ///   specified game object.
+        ///   Selects all descendants (children, grandchildren, etc.) of a game object.
         /// </summary>
         /// <param name="gameObject">Game object to select the descendants of.</param>
-        /// <returns>All descendants of the specified game object.</returns>
+        /// <returns>All descendants of the game object.</returns>
         public static IEnumerable<GameObject> GetDescendants(this GameObject gameObject)
         {
             foreach (var child in gameObject.GetChildren())
@@ -153,12 +151,12 @@ namespace UnityQuery
         }
 
         /// <summary>
-        ///   Selects all descendants (children, grandchildren, etc.) of the
-        ///   specified game object, and the game object itself.
+        ///   Selects all descendants (children, grandchildren, etc.) of a
+        ///   game object, and the game object itself.
         /// </summary>
         /// <param name="gameObject">Game object to select the descendants of.</param>
         /// <returns>
-        ///   All descendants of the specified game object,
+        ///   All descendants of the game object,
         ///   and the game object itself.
         /// </returns>
         public static IEnumerable<GameObject> GetDescendantsAndSelf(this GameObject gameObject)
@@ -172,11 +170,11 @@ namespace UnityQuery
         }
 
         /// <summary>
-        ///   Returns the full path of the game object, i.e. the names of all
+        ///   Returns the full path of a game object, i.e. the names of all
         ///   ancestors and the game object itself.
         /// </summary>
         /// <param name="gameObject">Game object to get the path of.</param>
-        /// <returns>Full path of the specified game object.</returns>
+        /// <returns>Full path of the game object.</returns>
         public static string GetPath(this GameObject gameObject)
         {
             return
@@ -184,6 +182,34 @@ namespace UnityQuery
                     .Reverse()
                     .Aggregate(string.Empty, (path, go) => path + "/" + go.name)
                     .Substring(1);
+        }
+
+        /// <summary>
+        ///   Indicates whether the a game object is an ancestor of another one.
+        /// </summary>
+        /// <param name="gameObject">Possible ancestor.</param>
+        /// <param name="descendant">Possible descendant.</param>
+        /// <returns>
+        ///   <c>true</c>, if the game object is an ancestor of the other one, and
+        ///   <c>false</c> otherwise.
+        /// </returns>
+        public static bool IsAncestorOf(this GameObject gameObject, GameObject descendant)
+        {
+            return gameObject.GetDescendants().Contains(descendant);
+        }
+
+        /// <summary>
+        ///   Indicates whether the a game object is a descendant of another one.
+        /// </summary>
+        /// <param name="gameObject">Possible descendant.</param>
+        /// <param name="ancestor">Possible ancestor.</param>
+        /// <returns>
+        ///   <c>true</c>, if the game object is a descendant of the other one, and
+        ///   <c>false</c> otherwise.
+        /// </returns>
+        public static bool IsDescendantOf(this GameObject gameObject, GameObject ancestor)
+        {
+            return gameObject.GetAncestors().Contains(ancestor);
         }
 
         #endregion
