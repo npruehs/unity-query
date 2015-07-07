@@ -6,6 +6,15 @@ Each and every one of us has written these small utility and extension methods w
 
 If you're missing any of your personal favotites, we'd love to see it - please refer to the Contributing section below!
 
+## Getting UnityQuery
+
+You can either
+
+* download the latest [Unity package](https://github.com/npruehs/unity-query/releases), or
+* checkout the repository (requires [Unity Test Tools](https://www.assetstore.unity3d.com/en/#!/content/13802))
+
+Later releases will be available at the Asset Store as well.
+
 ## Features
 
 * Component-wise vector swizzling (e.g. v.XZ)
