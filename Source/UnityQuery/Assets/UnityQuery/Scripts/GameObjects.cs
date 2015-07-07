@@ -23,7 +23,7 @@ namespace UnityQuery
         /// <returns>New child.</returns>
         public static GameObject AddChild(this GameObject parent)
         {
-            return parent.AddChild("GameObject");
+            return parent.AddChild("New Game Object");
         }
 
         /// <summary>
@@ -169,6 +169,21 @@ namespace UnityQuery
             {
                 yield return descendant;
             }
+        }
+
+        /// <summary>
+        ///   Returns the full path of the game object, i.e. the names of all
+        ///   ancestors and the game object itself.
+        /// </summary>
+        /// <param name="gameObject">Game object to get the path of.</param>
+        /// <returns>Full path of the specified game object.</returns>
+        public static string GetPath(this GameObject gameObject)
+        {
+            return
+                gameObject.GetAncestorsAndSelf()
+                    .Reverse()
+                    .Aggregate(string.Empty, (path, go) => path + "/" + go.name)
+                    .Substring(1);
         }
 
         #endregion
