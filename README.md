@@ -1,6 +1,6 @@
 # UnityQuery
 
-UnityQuery is a fast, small, lightweight C# library designed to increase productivity with [Unity3D](http://unity3d.com/).
+UnityQuery is a small, lightweight C# library designed to increase productivity with [Unity3D](http://unity3d.com/).
 
 Each and every one of us has written these small utility and extension methods we're using and re-writing over and over again with each new project. UnityQuery aims to collect the most general, versatile and helpful of these code snippets for re-use, and is inspired by recent work at the [Slash Framework](http://www.slashgames.org/framework) and by [LINQ to GameObject](https://github.com/neuecc/LINQ-to-GameObject-for-Unity) by Yoshifumi Kawai.
 
@@ -12,6 +12,8 @@ If you're missing any of your personal favorites, we'd love to see it - please r
 * Hierarchy queries (e.g. GetChildren, GetDescendants, IsAncestor, ...)
 * Hierarchy manipulation (e.g. DestroyChildren)
 * Collection extensions (e.g. ContainsAll, GetValueOrDefault, IsNullOrEmpty, SequenceToString)
+* Logs with timestamps
+* Picking (e.g. object at mouse position)
 
 ## Getting UnityQuery
 
@@ -35,8 +37,7 @@ Right now, all of the UnityQuery methods are implemented as extension methods.
 	
 That means, you can use all of them as syntatic sugar without having to recall where they're located.
 
-    var list = new List<int> { 1, 2, 3 };
-    Debug.Log(list.SequenceToString());
+    var o = Camera.main.PickObject();
 
 ## Development Cycle
 

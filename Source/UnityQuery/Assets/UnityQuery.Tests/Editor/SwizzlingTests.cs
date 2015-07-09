@@ -25,7 +25,49 @@ namespace UnityQuery.Tests
         #region Public Methods and Operators
 
         [Test]
-        public void TestVectorXY()
+        public void TestVector2XY()
+        {
+            // Arrange.
+            var u = new Vector2(X, Y);
+
+            // Act.
+            var v = u.XY();
+
+            // Assert.
+            Assert.AreEqual(X, v.x);
+            Assert.AreEqual(Y, v.y);
+        }
+
+        [Test]
+        public void TestVector2XZ()
+        {
+            // Arrange.
+            var u = new Vector2(X, Y);
+
+            // Act.
+            var v = u.XZ();
+
+            // Assert.
+            Assert.AreEqual(X, v.x);
+            Assert.AreEqual(Y, v.z);
+        }
+
+        [Test]
+        public void TestVector2YZ()
+        {
+            // Arrange.
+            var u = new Vector2(X, Y);
+
+            // Act.
+            var v = u.YZ();
+
+            // Assert.
+            Assert.AreEqual(X, v.y);
+            Assert.AreEqual(Y, v.z);
+        }
+
+        [Test]
+        public void TestVector3XY()
         {
             // Arrange.
             var u = new Vector3(X, Y, Z);
@@ -39,7 +81,7 @@ namespace UnityQuery.Tests
         }
 
         [Test]
-        public void TestVectorXZ()
+        public void TestVector3XZ()
         {
             // Arrange.
             var u = new Vector3(X, Y, Z);
@@ -53,7 +95,7 @@ namespace UnityQuery.Tests
         }
 
         [Test]
-        public void TestVectorYZ()
+        public void TestVector3YZ()
         {
             // Arrange.
             var u = new Vector3(X, Y, Z);
