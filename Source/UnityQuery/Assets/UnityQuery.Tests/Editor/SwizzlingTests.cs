@@ -25,6 +25,84 @@ namespace UnityQuery.Tests
         #region Public Methods and Operators
 
         [Test]
+        public void TestVector2WithX()
+        {
+            // Arrange.
+            var u = new Vector2(X, Y);
+            const int NewX = 4;
+
+            // Act.
+            var v = u.WithX(NewX);
+
+            // Assert.
+            Assert.AreEqual(NewX, v.x);
+            Assert.AreEqual(u.y, v.y);
+        }
+
+        [Test]
+        public void TestVector2WithY()
+        {
+            // Arrange.
+            var u = new Vector2(X, Y);
+            const int NewY = 4;
+
+            // Act.
+            var v = u.WithY(NewY);
+
+            // Assert.
+            Assert.AreEqual(u.x, v.x);
+            Assert.AreEqual(NewY, v.y);
+        }
+
+        [Test]
+        public void TestVector3WithX()
+        {
+            // Arrange.
+            var u = new Vector3(X, Y, Z);
+            const int NewX = 4;
+
+            // Act.
+            var v = u.WithX(NewX);
+
+            // Assert.
+            Assert.AreEqual(NewX, v.x);
+            Assert.AreEqual(u.y, v.y);
+            Assert.AreEqual(u.z, v.z);
+        }
+
+        [Test]
+        public void TestVector3WithY()
+        {
+            // Arrange.
+            var u = new Vector3(X, Y, Z);
+            const int NewY = 4;
+
+            // Act.
+            var v = u.WithY(NewY);
+
+            // Assert.
+            Assert.AreEqual(u.x, v.x);
+            Assert.AreEqual(NewY, v.y);
+            Assert.AreEqual(u.z, v.z);
+        }
+
+        [Test]
+        public void TestVector3WithZ()
+        {
+            // Arrange.
+            var u = new Vector3(X, Y, Z);
+            const int NewZ = 4;
+
+            // Act.
+            var v = u.WithZ(NewZ);
+
+            // Assert.
+            Assert.AreEqual(u.x, v.x);
+            Assert.AreEqual(u.y, v.y);
+            Assert.AreEqual(NewZ, v.z);
+        }
+
+        [Test]
         public void TestVector3XY()
         {
             // Arrange.
