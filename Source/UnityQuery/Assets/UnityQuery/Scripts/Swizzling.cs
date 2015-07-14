@@ -12,14 +12,34 @@ namespace UnityQuery
     {
         #region Public Methods and Operators
 
+        public static Vector2 WithX(this Vector2 v, float newX)
+        {
+            return new Vector2(newX, v.y);
+        }
+
+        public static Vector3 WithX(this Vector3 v, float newX)
+        {
+            return new Vector3(newX, v.y, v.z);
+        }
+
+        public static Vector2 WithY(this Vector2 v, float newY)
+        {
+            return new Vector2(v.x, newY);
+        }
+
+        public static Vector3 WithY(this Vector3 v, float newY)
+        {
+            return new Vector3(v.x, newY, v.z);
+        }
+
+        public static Vector3 WithZ(this Vector3 v, float newZ)
+        {
+            return new Vector3(v.x, v.y, newZ);
+        }
+
         public static Vector2 XY(this Vector3 v)
         {
             return new Vector2(v.x, v.y);
-        }
-
-        public static Vector3 XY(this Vector2 v)
-        {
-            return new Vector3(v.x, v.y, 0.0f);
         }
 
         public static Vector2 XZ(this Vector3 v)
@@ -27,19 +47,9 @@ namespace UnityQuery
             return new Vector2(v.x, v.z);
         }
 
-        public static Vector3 XZ(this Vector2 v)
-        {
-            return new Vector3(v.x, 0.0f, v.y);
-        }
-
         public static Vector2 YZ(this Vector3 v)
         {
             return new Vector2(v.y, v.z);
-        }
-
-        public static Vector3 YZ(this Vector2 v)
-        {
-            return new Vector3(0.0f, v.x, v.y);
         }
 
         #endregion

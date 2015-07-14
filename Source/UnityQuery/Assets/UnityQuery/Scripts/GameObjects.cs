@@ -221,6 +221,41 @@ namespace UnityQuery
             transform.localScale = Vector3.one;
         }
 
+        /// <summary>
+        ///   Sets the layer of the game object.
+        /// </summary>
+        /// <param name="gameObject">Game object to set the layer of.</param>
+        /// <param name="layerName">Name of the new layer.</param>
+        public static void SetLayer(this GameObject gameObject, string layerName)
+        {
+            var layer = LayerMask.NameToLayer(layerName);
+            gameObject.layer = layer;
+        }
+
+        /// <summary>
+        ///   Sets the layer of the game object and all of its descendants.
+        /// </summary>
+        /// <param name="gameObject">Game object to set the layers of.</param>
+        /// <param name="layerName">Name of the new layer.</param>
+        public static void SetLayers(this GameObject gameObject, string layerName)
+        {
+            var layer = LayerMask.NameToLayer(layerName);
+            gameObject.SetLayers(layer);
+        }
+
+        /// <summary>
+        ///   Sets the layer of the game object and all of its descendants.
+        /// </summary>
+        /// <param name="gameObject">Game object to set the layers of.</param>
+        /// <param name="layer">New layer.</param>
+        public static void SetLayers(this GameObject gameObject, int layer)
+        {
+            foreach (var o in gameObject.GetDescendantsAndSelf())
+            {
+                o.layer = layer;
+            }
+        }
+
         #endregion
     }
 }

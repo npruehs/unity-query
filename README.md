@@ -8,12 +8,13 @@ If you're missing any of your personal favorites, we'd love to see it - please r
 
 ## Features
 
-* Component-wise vector swizzling (e.g. v.XZ)
 * Hierarchy queries (e.g. GetChildren, GetDescendants, IsAncestor, ...)
 * Hierarchy manipulation (e.g. DestroyChildren)
+* Component-wise vector swizzling (e.g. v.XZ)
+* Changing single vector components while preserving immutability
+* Picking (e.g. object at mouse position)
 * Collection extensions (e.g. ContainsAll, GetValueOrDefault, IsNullOrEmpty, SequenceToString)
 * Logs with timestamps
-* Picking (e.g. object at mouse position)
 
 ## Getting UnityQuery
 
@@ -38,6 +39,8 @@ Right now, all of the UnityQuery methods are implemented as extension methods.
 That means, you can use all of them as syntatic sugar without having to recall where they're located.
 
     var o = Camera.main.PickObject();
+
+Note there's also a [Cheat Sheet](https://github.com/npruehs/unity-query/raw/master/Source/UnityQuery/Assets/UnityQuery/UnityQuery%20Cheat%20Sheet.pdf) available for you.
 
 ## Development Cycle
 
