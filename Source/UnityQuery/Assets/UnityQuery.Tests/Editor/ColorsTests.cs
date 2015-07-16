@@ -14,23 +14,99 @@ namespace UnityQuery.Tests
     {
         #region Constants
 
-        private const float A = 0.4f;
+        private const byte ByteAlpha = 4;
 
-        private const float B = 0.3f;
+        private const byte ByteBlue = 3;
 
-        private const float G = 0.2f;
+        private const byte ByteGreen = 2;
 
-        private const float R = 0.1f;
+        private const byte ByteRed = 1;
+
+        private const float FloatAlpha = 0.4f;
+
+        private const float FloatBlue = 0.3f;
+
+        private const float FloatGreen = 0.2f;
+
+        private const float FloatRed = 0.1f;
 
         #endregion
 
         #region Public Methods and Operators
 
         [Test]
-        public void TestColorWithA()
+        public void TestColorWithByteAlpha()
         {
             // Arrange.
-            var before = new Color(R, G, B, A);
+            Color32 before = new Color32(ByteRed, ByteGreen, ByteBlue, ByteAlpha);
+            const byte NewAlpha = 5;
+
+            // Act.
+            Color32 after = ((Color)before).WithAlpha(NewAlpha);
+
+            // Assert.
+            Assert.AreEqual(before.r, after.r);
+            Assert.AreEqual(before.g, after.g);
+            Assert.AreEqual(before.b, after.b);
+            Assert.AreEqual(NewAlpha, after.a);
+        }
+
+        [Test]
+        public void TestColorWithByteBlue()
+        {
+            // Arrange.
+            Color32 before = new Color32(ByteRed, ByteGreen, ByteBlue, ByteAlpha);
+            const byte NewBlue = 5;
+
+            // Act.
+            Color32 after = ((Color)before).WithBlue(NewBlue);
+
+            // Assert.
+            Assert.AreEqual(before.r, after.r);
+            Assert.AreEqual(before.g, after.g);
+            Assert.AreEqual(NewBlue, after.b);
+            Assert.AreEqual(before.a, after.a);
+        }
+
+        [Test]
+        public void TestColorWithByteGreen()
+        {
+            // Arrange.
+            Color32 before = new Color32(ByteRed, ByteGreen, ByteBlue, ByteAlpha);
+            const byte NewGreen = 5;
+
+            // Act.
+            Color32 after = ((Color)before).WithGreen(NewGreen);
+
+            // Assert.
+            Assert.AreEqual(before.r, after.r);
+            Assert.AreEqual(NewGreen, after.g);
+            Assert.AreEqual(before.b, after.b);
+            Assert.AreEqual(before.a, after.a);
+        }
+
+        [Test]
+        public void TestColorWithByteRed()
+        {
+            // Arrange.
+            Color32 before = new Color32(ByteRed, ByteGreen, ByteBlue, ByteAlpha);
+            const byte NewRed = 5;
+
+            // Act.
+            Color32 after = ((Color)before).WithRed(NewRed);
+
+            // Assert.
+            Assert.AreEqual(NewRed, after.r);
+            Assert.AreEqual(before.g, after.g);
+            Assert.AreEqual(before.b, after.b);
+            Assert.AreEqual(before.a, after.a);
+        }
+
+        [Test]
+        public void TestColorWithFloatAlpha()
+        {
+            // Arrange.
+            var before = new Color(FloatRed, FloatGreen, FloatBlue, FloatAlpha);
             const float NewAlpha = 0.5f;
 
             // Act.
@@ -44,10 +120,10 @@ namespace UnityQuery.Tests
         }
 
         [Test]
-        public void TestColorWithB()
+        public void TestColorWithFloatBlue()
         {
             // Arrange.
-            var before = new Color(R, G, B, A);
+            var before = new Color(FloatRed, FloatGreen, FloatBlue, FloatAlpha);
             const float NewBlue = 0.5f;
 
             // Act.
@@ -61,10 +137,10 @@ namespace UnityQuery.Tests
         }
 
         [Test]
-        public void TestColorWithG()
+        public void TestColorWithFloatGreen()
         {
             // Arrange.
-            var before = new Color(R, G, B, A);
+            var before = new Color(FloatRed, FloatGreen, FloatBlue, FloatAlpha);
             const float NewGreen = 0.5f;
 
             // Act.
@@ -78,10 +154,10 @@ namespace UnityQuery.Tests
         }
 
         [Test]
-        public void TestColorWithR()
+        public void TestColorWithFloatRed()
         {
             // Arrange.
-            var before = new Color(R, G, B, A);
+            var before = new Color(FloatRed, FloatGreen, FloatBlue, FloatAlpha);
             const float NewRed = 0.5f;
 
             // Act.
