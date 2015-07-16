@@ -10,7 +10,7 @@ If you've got no idea how to help, head over to our [issue tracker](https://gith
 
 If you know exactly what you're missing, [open a new issue](https://github.com/npruehs/unity-query/issues/new) to begin a short discussion about your idea and how it fits the project. If we all agree, you're good to go!
 
-Note there's also an [FAQ](https://github.com/npruehs/unity-query/blob/master/CONTRIBUTING.md) explaining some features we deliberately did not implement in UnityQuery.
+Note there's also an [FAQ](https://github.com/npruehs/unity-query/blob/master/FAQ.md) explaining some features we deliberately did not implement in UnityQuery.
 
 ## Step 2: Fork the project and check out the code
 
