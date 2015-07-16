@@ -183,6 +183,23 @@ namespace UnityQuery
         }
 
         /// <summary>
+        ///   Gets the hierarchy root of the game object.
+        /// </summary>
+        /// <param name="gameObject">Game object to get the root of.</param>
+        /// <returns>Root of the specified game object.</returns>
+        public static GameObject GetRoot(this GameObject gameObject)
+        {
+            var root = gameObject.transform;
+
+            while (root.parent != null)
+            {
+                root = root.parent;
+            }
+
+            return root.gameObject;
+        }
+
+        /// <summary>
         ///   Indicates whether the a game object is an ancestor of another one.
         /// </summary>
         /// <param name="gameObject">Possible ancestor.</param>
