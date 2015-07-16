@@ -211,6 +211,29 @@ namespace UnityQuery
         }
 
         /// <summary>
+        ///   Filters a sequence of game objects by layer.
+        /// </summary>
+        /// <param name="gameObjects">Game objects to filter.</param>
+        /// <param name="layer">Layer to get the game objects of.</param>
+        /// <returns>Game objects on the specified layer.</returns>
+        public static IEnumerable<GameObject> OnLayer(this IEnumerable<GameObject> gameObjects, int layer)
+        {
+            return gameObjects.Where(gameObject => Equals(gameObject.layer, layer));
+        }
+
+        /// <summary>
+        ///   Filters a sequence of game objects by layer.
+        /// </summary>
+        /// <param name="gameObjects">Game objects to filter.</param>
+        /// <param name="layerName">Layer to get the game objects of.</param>
+        /// <returns>Game objects on the specified layer.</returns>
+        public static IEnumerable<GameObject> OnLayer(this IEnumerable<GameObject> gameObjects, string layerName)
+        {
+            var layer = LayerMask.NameToLayer(layerName);
+            return gameObjects.Where(gameObject => Equals(gameObject.layer, layer));
+        }
+
+        /// <summary>
         ///   Resets the local position, rotation and scale of a transform.
         /// </summary>
         /// <param name="transform">Transform to reset.</param>
@@ -254,6 +277,17 @@ namespace UnityQuery
             {
                 o.layer = layer;
             }
+        }
+
+        /// <summary>
+        ///   Filters a sequence of game objects by tag.
+        /// </summary>
+        /// <param name="gameObjects">Game objects to filter.</param>
+        /// <param name="tag">Tag to get the game objects of.</param>
+        /// <returns>Game objects with the specified tag.</returns>
+        public static IEnumerable<GameObject> WithTag(this IEnumerable<GameObject> gameObjects, string tag)
+        {
+            return gameObjects.Where(gameObject => Equals(gameObject.tag, tag));
         }
 
         #endregion
