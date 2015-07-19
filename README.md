@@ -67,7 +67,7 @@ After being able to reproduce the issue, we'll look into fixing it immediately.
 
 * [Nick Prühs](https://github.com/npruehs) (Maintainer)
 * [Björn von der Osten](https://github.com/Froghut)
-* [Patrick Henschel](https://twitter.com/ffyhlkain)
+* [Patrick Henschel](https://bitbucket.org/Ffyhlkain)
 * Michael Kluge
 
 ## License
