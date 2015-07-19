@@ -42,7 +42,7 @@ namespace UnityQuery.Tests
         }
 
         [Test]
-        public void TestIndexOf()
+        public void TestIndexOfElement()
         {
             // Arrange.
             IEnumerable<int> list = new List<int> { 1, 2, 3 };
@@ -51,6 +51,16 @@ namespace UnityQuery.Tests
             Assert.AreEqual(0, list.IndexOf(1));
             Assert.AreEqual(2, list.IndexOf(3));
             Assert.AreEqual(-1, list.IndexOf(5));
+        }
+
+        [Test]
+        public void TestIndexOfPredicate()
+        {
+            // Arrange.
+            IEnumerable<int> list = new List<int> { 1, 2, 3 };
+
+            // Assert.
+            Assert.AreEqual(2, list.IndexOf(i => i > 2));
         }
 
         [Test]
