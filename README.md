@@ -69,6 +69,7 @@ After being able to reproduce the issue, we'll look into fixing it immediately.
 * [Björn von der Osten](https://github.com/Froghut)
 * [Patrick Henschel](https://bitbucket.org/Ffyhlkain)
 * Michael Kluge
+* [Johannes Deml](https://github.com/JohannesDeml)
 
 ## License
 
