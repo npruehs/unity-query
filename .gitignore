@@ -23,3 +23,5 @@ sysinfo.txt
 # Unity 3rd party libraries
 UnityTestTools*
 UnityVS*
+Source/UnityQuery/Assets/AssetStoreTools/
+Source/UnityQuery/Assets/AssetStoreTools.meta

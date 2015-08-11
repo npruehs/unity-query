@@ -6,6 +6,7 @@
 
 namespace UnityQuery
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
@@ -99,6 +100,33 @@ namespace UnityQuery
             foreach (var i in items)
             {
                 if (Equals(i, item))
+                {
+                    return index;
+                }
+
+                ++index;
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        ///   Returns the zero-based index of the first  item in a sequence that satisfies a condition.
+        /// </summary>
+        /// <typeparam name="T">Type of the elements of the sequence.</typeparam>
+        /// <param name="items">Sequence to search.</param>
+        /// <param name="predicate">Function to test each element for a condition..</param>
+        /// <returns>
+        ///   Index of the first item satisfying the condition, if any could be found,
+        ///   and <c>-1</c> otherwise.
+        /// </returns>
+        public static int IndexOf<T>(this IEnumerable<T> items, Func<T, bool> predicate)
+        {
+            var index = 0;
+
+            foreach (var i in items)
+            {
+                if (predicate(i))
                 {
                     return index;
                 }
