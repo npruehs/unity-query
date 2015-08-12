@@ -20,10 +20,8 @@ If you're missing any of your personal favorites, we'd love to see it - please r
 
 You can either
 
-* download the latest [Unity package](https://github.com/npruehs/unity-query/releases), or
-* checkout the repository (requires [Unity Test Tools](https://www.assetstore.unity3d.com/en/#!/content/13802))
-
-Later releases will be available at the Asset Store as well.
+* download STABLE from the [Unity Asset Store](https://www.assetstore.unity3d.com/en/#!/content/42015)
+* checkout LATEST from this repository (requires [Unity Test Tools](https://www.assetstore.unity3d.com/en/#!/content/13802))
 
 ## Usage
 
@@ -31,10 +29,30 @@ Just import the `UnityQuery` namespace and you're good to go!
 
     using UnityQuery;
 
+The library adds many hierarchy queries to your game objects.
+
+    // Select all descendants(children, grandchildren, etc.).
+    foreach (var descendant in this.gameObject.GetDescendants())
+    {
+        // ...
+    }
+
+You can freely re-combine these queries with other library methods.
+
+    // Change the layers of all default layer descendants to UI.
+    this.gameObject
+        .GetDescendants()
+        .OnLayer("Default")
+        .AsQuery()
+        .SetLayers("UI");
+		
 Right now, all of the UnityQuery methods are implemented as extension methods.
 
+    // u = (1, 2, 3)
     Vector3 u = new Vector3(1, 2, 3);
-    Vector2 v = u.XY();
+	
+	// v = (1, 3)
+    Vector2 v = u.XZ();
 	
 That means, you can use all of them as syntatic sugar without having to recall where they're located.
 
@@ -71,6 +89,7 @@ After being able to reproduce the issue, we'll look into fixing it immediately.
 * [Patrick Henschel](https://bitbucket.org/Ffyhlkain)
 * Michael Kluge
 * [Johannes Deml](https://github.com/JohannesDeml)
+* [Slawa Deisling](https://twitter.com/SlawaDeisling)
 
 ## License
 

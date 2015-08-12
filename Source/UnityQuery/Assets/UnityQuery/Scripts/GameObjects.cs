@@ -6,7 +6,6 @@
 
 namespace UnityQuery
 {
-    using System.Collections.Generic;
     using System.Linq;
 
     using UnityEngine;
@@ -82,6 +81,20 @@ namespace UnityQuery
                     Object.Destroy(child);
                 }
             }
+        }
+
+        /// <summary>
+        ///   Gets the component of type <typeparamref name="T" /> if the game object has one attached,
+        ///   and adds and returns a new one if it doesn't.
+        /// </summary>
+        /// <typeparam name="T">Type of the component to get or add.</typeparam>
+        /// <param name="gameObject">Game object to get the component of.</param>
+        /// <returns>
+        ///   Component of type <typeparamref name="T" /> attached to the game object.
+        /// </returns>
+        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        {
+            return gameObject.GetComponent<T>() ?? gameObject.AddComponent<T>();
         }
 
         /// <summary>
