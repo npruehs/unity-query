@@ -21,7 +21,7 @@ If you're missing any of your personal favorites, we'd love to see it - please r
 You can either
 
 * download STABLE from the [Unity Asset Store](https://www.assetstore.unity3d.com/en/#!/content/42015)
-* checkout LATEST from this repository (requires [Unity Test Tools](https://www.assetstore.unity3d.com/en/#!/content/13802))
+* checkout LATEST from this repository
 
 ## Usage
 
