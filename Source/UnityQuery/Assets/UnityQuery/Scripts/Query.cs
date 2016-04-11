@@ -10,8 +10,6 @@ namespace UnityQuery
     using System.Collections.Generic;
     using System.Linq;
 
-    using UnityEngine;
-
     /// <summary>
     ///   Wraps a sequence of objects, forcing immediate execution of an
     ///   enumeration.
