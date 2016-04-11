@@ -55,7 +55,7 @@ namespace UnityQuery
             }
 
             var transform = go.transform;
-            transform.parent = parent.transform;
+            transform.SetParent(parent.transform);
             transform.Reset();
             go.layer = parent.layer;
             return go;
