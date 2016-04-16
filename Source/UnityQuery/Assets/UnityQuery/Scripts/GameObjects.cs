@@ -6,7 +6,6 @@
 
 namespace UnityQuery
 {
-    using System.Collections.Generic;
     using System.Linq;
 
     using UnityEngine;
@@ -56,7 +55,7 @@ namespace UnityQuery
             }
 
             var transform = go.transform;
-            transform.parent = parent.transform;
+            transform.SetParent(parent.transform);
             transform.Reset();
             go.layer = parent.layer;
             return go;
@@ -85,86 +84,17 @@ namespace UnityQuery
         }
 
         /// <summary>
-        ///   Selects all ancestors (parent, grandparent, etc.) of a game object.
+        ///   Gets the component of type <typeparamref name="T" /> if the game object has one attached,
+        ///   and adds and returns a new one if it doesn't.
         /// </summary>
-        /// <param name="gameObject">Game object to select the ancestors of.</param>
-        /// <returns>All ancestors of the object.</returns>
-        public static IEnumerable<GameObject> GetAncestors(this GameObject gameObject)
-        {
-            var parent = gameObject.transform.parent;
-
-            while (parent != null)
-            {
-                yield return parent.gameObject;
-                parent = parent.parent;
-            }
-        }
-
-        /// <summary>
-        ///   Selects all ancestors (parent, grandparent, etc.) of a game object,
-        ///   and the game object itself.
-        /// </summary>
-        /// <param name="gameObject">Game object to select the ancestors of.</param>
+        /// <typeparam name="T">Type of the component to get or add.</typeparam>
+        /// <param name="gameObject">Game object to get the component of.</param>
         /// <returns>
-        ///   All ancestors of the game object,
-        ///   and the game object itself.
+        ///   Component of type <typeparamref name="T" /> attached to the game object.
         /// </returns>
-        public static IEnumerable<GameObject> GetAncestorsAndSelf(this GameObject gameObject)
+        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
         {
-            yield return gameObject;
-
-            foreach (var ancestor in gameObject.GetAncestors())
-            {
-                yield return ancestor;
-            }
-        }
-
-        /// <summary>
-        ///   Selects all children of a game object.
-        /// </summary>
-        /// <param name="gameObject">Game object to select the children of.</param>
-        /// <returns>All children of the game object.</returns>
-        public static IEnumerable<GameObject> GetChildren(this GameObject gameObject)
-        {
-            return (from Transform child in gameObject.transform select child.gameObject);
-        }
-
-        /// <summary>
-        ///   Selects all descendants (children, grandchildren, etc.) of a game object.
-        /// </summary>
-        /// <param name="gameObject">Game object to select the descendants of.</param>
-        /// <returns>All descendants of the game object.</returns>
-        public static IEnumerable<GameObject> GetDescendants(this GameObject gameObject)
-        {
-            foreach (var child in gameObject.GetChildren())
-            {
-                yield return child;
-
-                // Depth-first.
-                foreach (var descendant in child.GetDescendants())
-                {
-                    yield return descendant;
-                }
-            }
-        }
-
-        /// <summary>
-        ///   Selects all descendants (children, grandchildren, etc.) of a
-        ///   game object, and the game object itself.
-        /// </summary>
-        /// <param name="gameObject">Game object to select the descendants of.</param>
-        /// <returns>
-        ///   All descendants of the game object,
-        ///   and the game object itself.
-        /// </returns>
-        public static IEnumerable<GameObject> GetDescendantsAndSelf(this GameObject gameObject)
-        {
-            yield return gameObject;
-
-            foreach (var descendant in gameObject.GetDescendants())
-            {
-                yield return descendant;
-            }
+            return gameObject.GetComponent<T>() ?? gameObject.AddComponent<T>();
         }
 
         /// <summary>
@@ -180,74 +110,6 @@ namespace UnityQuery
                     .Reverse()
                     .Aggregate(string.Empty, (path, go) => path + "/" + go.name)
                     .Substring(1);
-        }
-
-        /// <summary>
-        ///   Gets the hierarchy root of the game object.
-        /// </summary>
-        /// <param name="gameObject">Game object to get the root of.</param>
-        /// <returns>Root of the specified game object.</returns>
-        public static GameObject GetRoot(this GameObject gameObject)
-        {
-            var root = gameObject.transform;
-
-            while (root.parent != null)
-            {
-                root = root.parent;
-            }
-
-            return root.gameObject;
-        }
-
-        /// <summary>
-        ///   Indicates whether the a game object is an ancestor of another one.
-        /// </summary>
-        /// <param name="gameObject">Possible ancestor.</param>
-        /// <param name="descendant">Possible descendant.</param>
-        /// <returns>
-        ///   <c>true</c>, if the game object is an ancestor of the other one, and
-        ///   <c>false</c> otherwise.
-        /// </returns>
-        public static bool IsAncestorOf(this GameObject gameObject, GameObject descendant)
-        {
-            return gameObject.GetDescendants().Contains(descendant);
-        }
-
-        /// <summary>
-        ///   Indicates whether the a game object is a descendant of another one.
-        /// </summary>
-        /// <param name="gameObject">Possible descendant.</param>
-        /// <param name="ancestor">Possible ancestor.</param>
-        /// <returns>
-        ///   <c>true</c>, if the game object is a descendant of the other one, and
-        ///   <c>false</c> otherwise.
-        /// </returns>
-        public static bool IsDescendantOf(this GameObject gameObject, GameObject ancestor)
-        {
-            return gameObject.GetAncestors().Contains(ancestor);
-        }
-
-        /// <summary>
-        ///   Filters a sequence of game objects by layer.
-        /// </summary>
-        /// <param name="gameObjects">Game objects to filter.</param>
-        /// <param name="layer">Layer to get the game objects of.</param>
-        /// <returns>Game objects on the specified layer.</returns>
-        public static IEnumerable<GameObject> OnLayer(this IEnumerable<GameObject> gameObjects, int layer)
-        {
-            return gameObjects.Where(gameObject => Equals(gameObject.layer, layer));
-        }
-
-        /// <summary>
-        ///   Filters a sequence of game objects by layer.
-        /// </summary>
-        /// <param name="gameObjects">Game objects to filter.</param>
-        /// <param name="layerName">Layer to get the game objects of.</param>
-        /// <returns>Game objects on the specified layer.</returns>
-        public static IEnumerable<GameObject> OnLayer(this IEnumerable<GameObject> gameObjects, string layerName)
-        {
-            var layer = LayerMask.NameToLayer(layerName);
-            return gameObjects.Where(gameObject => Equals(gameObject.layer, layer));
         }
 
         /// <summary>
@@ -273,38 +135,34 @@ namespace UnityQuery
         }
 
         /// <summary>
-        ///   Sets the layer of the game object and all of its descendants.
+        ///   Sets the layers of all queried game objects.
         /// </summary>
-        /// <param name="gameObject">Game object to set the layers of.</param>
+        /// <param name="gameObjects">Game objects to set the layers of.</param>
         /// <param name="layerName">Name of the new layer.</param>
-        public static void SetLayers(this GameObject gameObject, string layerName)
+        /// <returns>Query for further execution.</returns>
+        public static Query<GameObject> SetLayers(this Query<GameObject> gameObjects, string layerName)
         {
             var layer = LayerMask.NameToLayer(layerName);
-            gameObject.SetLayers(layer);
-        }
-
-        /// <summary>
-        ///   Sets the layer of the game object and all of its descendants.
-        /// </summary>
-        /// <param name="gameObject">Game object to set the layers of.</param>
-        /// <param name="layer">New layer.</param>
-        public static void SetLayers(this GameObject gameObject, int layer)
-        {
-            foreach (var o in gameObject.GetDescendantsAndSelf())
+            foreach (var o in gameObjects)
             {
                 o.layer = layer;
             }
+            return gameObjects;
         }
 
         /// <summary>
-        ///   Filters a sequence of game objects by tag.
+        ///   Sets the tags of all queried game objects.
         /// </summary>
-        /// <param name="gameObjects">Game objects to filter.</param>
-        /// <param name="tag">Tag to get the game objects of.</param>
-        /// <returns>Game objects with the specified tag.</returns>
-        public static IEnumerable<GameObject> WithTag(this IEnumerable<GameObject> gameObjects, string tag)
+        /// <param name="gameObjects">Game objects to set the tags of.</param>
+        /// <param name="tag">Name of the new tag.</param>
+        /// <returns>Query for further execution.</returns>
+        public static Query<GameObject> SetTags(this Query<GameObject> gameObjects, string tag)
         {
-            return gameObjects.Where(gameObject => Equals(gameObject.tag, tag));
+            foreach (var gameObject in gameObjects)
+            {
+                gameObject.tag = tag;
+            }
+            return gameObjects;
         }
 
         #endregion

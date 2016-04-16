@@ -2,7 +2,7 @@
 
 UnityQuery is a small, lightweight C# library designed to increase productivity with [Unity3D](http://unity3d.com/).
 
-Each and every one of us has written these small utility and extension methods we're using and re-writing over and over again with each new project. UnityQuery aims to collect the most general, versatile and helpful of these code snippets for re-use, and is inspired by recent work at the [Slash Framework](http://www.slashgames.org/framework) and by [LINQ to GameObject](https://github.com/neuecc/LINQ-to-GameObject-for-Unity) by Yoshifumi Kawai.
+Each and every one of us has written these small utility and extension methods we're using and re-writing over and over again with each new project. UnityQuery aims to collect the most general, versatile and helpful of these code snippets for re-use, and is inspired by recent work at the [Slash Framework](https://github.com/SlashGames/slash-framework) and by [LINQ to GameObject](https://github.com/neuecc/LINQ-to-GameObject-for-Unity) by Yoshifumi Kawai.
 
 If you're missing any of your personal favorites, we'd love to see it - please refer to the [Contributing](https://github.com/npruehs/unity-query/blob/master/CONTRIBUTING.md) file!
 
@@ -20,10 +20,8 @@ If you're missing any of your personal favorites, we'd love to see it - please r
 
 You can either
 
-* download the latest [Unity package](https://github.com/npruehs/unity-query/releases), or
-* checkout the repository (requires [Unity Test Tools](https://www.assetstore.unity3d.com/en/#!/content/13802))
-
-Later releases will be available at the Asset Store as well.
+* download STABLE from the [Unity Asset Store](https://www.assetstore.unity3d.com/en/#!/content/42015)
+* checkout LATEST from this repository
 
 ## Usage
 
@@ -31,10 +29,30 @@ Just import the `UnityQuery` namespace and you're good to go!
 
     using UnityQuery;
 
+The library adds many hierarchy queries to your game objects.
+
+    // Select all descendants(children, grandchildren, etc.).
+    foreach (var descendant in this.gameObject.GetDescendants())
+    {
+        // ...
+    }
+
+You can freely re-combine these queries with other library methods.
+
+    // Change the layers of all default layer descendants to UI.
+    this.gameObject
+        .GetDescendants()
+        .OnLayer("Default")
+        .AsQuery()
+        .SetLayers("UI");
+		
 Right now, all of the UnityQuery methods are implemented as extension methods.
 
+    // u = (1, 2, 3)
     Vector3 u = new Vector3(1, 2, 3);
-    Vector2 v = u.XY();
+	
+	// v = (1, 3)
+    Vector2 v = u.XZ();
 	
 That means, you can use all of them as syntatic sugar without having to recall where they're located.
 
@@ -70,6 +88,8 @@ After being able to reproduce the issue, we'll look into fixing it immediately.
 * [Björn von der Osten](https://github.com/Froghut)
 * [Patrick Henschel](https://bitbucket.org/Ffyhlkain)
 * Michael Kluge
+* [Johannes Deml](https://github.com/JohannesDeml)
+* [Slawa Deisling](https://twitter.com/SlawaDeisling)
 
 ## License
 
