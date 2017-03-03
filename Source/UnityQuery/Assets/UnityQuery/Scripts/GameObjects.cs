@@ -165,6 +165,19 @@ namespace UnityQuery
             return gameObjects;
         }
 
+        /// <summary>
+        ///   Tries to get the component on the same <see cref="GameObject"/> of type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of the component to get.</typeparam>
+        /// <param name="obj"><see cref="GameObject"/> to try to get the component of.</param>
+        /// <param name="component">Found component, or <c>null</c> otherwise.</param>
+        /// <returns><c>true</c> if a component was found, and <c>false</c> otherwise.</returns>
+        public static bool TryGetComponent<T>(this GameObject obj, out T component)
+        {
+            component = obj.GetComponent<T>();
+            return component != null;
+        }
+
         #endregion
     }
 }

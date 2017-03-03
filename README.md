@@ -90,6 +90,7 @@ After being able to reproduce the issue, we'll look into fixing it immediately.
 * Michael Kluge
 * [Johannes Deml](https://github.com/JohannesDeml)
 * [Slawa Deisling](https://twitter.com/SlawaDeisling)
+* [Robin Fischer](https://github.com/robinryf)
 
 ## License
 
